@@ -1,0 +1,35 @@
+<!--Toolbar-->
+<mat-toolbar color="primary">
+
+  <!-- 1st Toolbar row -->
+  <mat-toolbar-row>
+    <button mat-icon-button>
+      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+    </button>&nbsp;&nbsp;&nbsp;
+    <h1>Big City Toys House</h1>
+    <span class="menu-spacer"></span>
+  </mat-toolbar-row>
+
+  <!-- 2nd Toolbar row -->
+  <mat-toolbar-row>
+      <span style="font-size: 12px;">The Shopping Cart will enable Customers to easily track their products and purchase them.</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<!--Sidenav-->
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <mat-nav-list>
+      <div>
+        <!-- <a mat-list-item [routerLink]="'/shoppingCart/books'" (click)="sidenav.toggle()"><mat-icon>home</mat-icon>&nbsp;Home</a> -->
+      </div>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- All the inner content is displayed in here. -->
+  <mat-sidenav-content>
+    <div style="height: 88vh;">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
