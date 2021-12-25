@@ -5,8 +5,8 @@
 
 <div class="container-dropdown">
   <mat-label>Product Categories</mat-label>
-    <mat-select [formControl]="product_cat">
-      <mat-option *ngFor="let productCategory of productCategories" [value]="productCategory">{{productCategory.name}}</mat-option>
+    <mat-select [(ngModel)]="selectedValue" name="productCategory">  
+      <mat-option *ngFor="let productCategory of productCategories" [value]="productCategory" (click)="getAllProductsForCategory(productCategory.id)">{{productCategory.name}}</mat-option>
     </mat-select>
 </div> 
 
@@ -21,8 +21,8 @@
 
 <!-- Product List Table. -->
 <div class="mat-elevation-z8">
-  <!-- <table mat-table [dataSource]="dataSource" matSort> -->
-  <table mat-table matSort>
+  <table mat-table [dataSource]="dataSource" matSort>
+
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
@@ -39,8 +39,8 @@
     <ng-container matColumnDef="add_to_cart">
       <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
       <td mat-cell *matCellDef="let row">
-        <!-- <button mat-flat-button color="primary" role="button" (click)="addItemToCart(row)"> -->
-        <button mat-flat-button color="primary" role="button">  
+        <button mat-flat-button color="primary" role="button" (click)="addItemToCart(row)">
+        <!-- <button mat-flat-button color="primary" role="button">   -->
           <mat-icon>add_shopping_cart</mat-icon>
             Add to cart
         </button>
@@ -52,7 +52,54 @@
     </tr>
   </table>
 
-  <!-- Paginator for the table. -->
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 </div>
 
+<!-- Defining the async state of the cart. -->
+<ng-container *ngIf="cartState | async as state">
+
+  <!-- CheckOut Cart Component-->
+  <app-cart [state]="state"></app-cart>
+
+</ng-container>
+
+
+<!-- Cart Item List Table. -->
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource1" matSort>
+
+    <!-- Product Name Column -->
+    <ng-container matColumnDef="productName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ProductName </th>
+      <td mat-cell *matCellDef="let row"> {{row.productName}} </td>
+    </ng-container>
+
+    <!-- Quantity Column -->
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </th>
+      <td mat-cell *matCellDef="let row"> {{row.quantity}} </td>
+    </ng-container>
+
+    <!-- SubTotal Column -->
+    <ng-container matColumnDef="subTotal">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> SubTotal </th>
+      <td mat-cell *matCellDef="let row"> {{row.subTotal}} </td>
+    </ng-container>
+
+    <!-- ProductId Column -->
+    <ng-container matColumnDef="productId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ProductId </th>
+      <td mat-cell *matCellDef="let row"> {{row.productId}} </td>
+    </ng-container>
+
+    <!-- ProductCategoryId Column -->
+    <ng-container matColumnDef="productCategoryId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ProductCategoryId </th>
+      <td mat-cell *matCellDef="let row"> {{row.productCategoryId}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns1;">
+    </tr>
+  </table>
+
+</div>

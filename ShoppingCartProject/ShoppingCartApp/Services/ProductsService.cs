@@ -20,5 +20,24 @@ namespace ShoppingCartApp.Services
             return _productRepository.GetAllProductCategories();
         }
 
+        //Get all productsForCategory service.
+        public IEnumerable<Product> GetAllProductsByCategoryID(int categoryID)
+        {
+            return _productRepository.GetAllProductsByCategoryID(categoryID);
+        }
+
+        //Get a product by the name.
+        public Product FindProductByName(string Name)
+        {
+            return _productRepository.FindProductByName(Name);
+        }
+
+        //Add new CartItem.
+        public string AddNewCartItem(Cart cart)
+        {
+            var result = _productRepository.AddNewCartItem(cart);
+
+            return result;
+        }
     }
 }

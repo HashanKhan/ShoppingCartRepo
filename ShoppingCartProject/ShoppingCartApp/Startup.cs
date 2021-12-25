@@ -34,9 +34,10 @@ namespace ShoppingCartApp
             services.AddScoped<IProductsRepository, ProductsRepository>();
             services.AddScoped<IProductsService, ProductsService>();
 
+            services.AddScoped<ICartRepository, CartRepository>();
+            services.AddScoped<ICartService, CartService>();
+
             services.AddControllers();
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

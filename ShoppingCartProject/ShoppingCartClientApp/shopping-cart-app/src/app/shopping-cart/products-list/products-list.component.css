@@ -34,4 +34,7 @@ td, th {
     position: absolute;
     top: 10%;
     left: 5%;
+    opacity: 0.75;
+    font-size: 0.75em;
+    width: 10%;
 }

@@ -18,7 +18,27 @@ namespace ShoppingCartApp.Persistence.Repositories
             return _context.ProductCategory.ToList();
         }
 
+        //Retrieve all products for category ID from the db.
+        public IEnumerable<Product> GetAllProductsByCategoryID(int categoryID)
+        {
+            var products = _context.Product.Where(p => p.ProductCategoryId == categoryID).ToList();
 
-        
+            return products;
+        }
+
+        //Retrieve a product by name from the db. 
+        public Product FindProductByName(string Name)
+        {
+            return _context.Product.SingleOrDefault(p => p.Name == Name);
+        }
+
+        //Add new product record to the db.
+        public string AddNewCartItem(Cart cart)
+        {
+                _context.Cart.Add(cart);
+                _context.SaveChanges();
+
+                return "The Product Registered Successfully.";
+        }
     }
 }
